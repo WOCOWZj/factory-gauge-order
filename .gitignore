@@ -1,0 +1,34 @@
+# Build outputs
+build/
+out/
+run/
+.gradle/
+*.log
+
+# Local dependency jars (never commit Create or other mods)
+libs/*.jar
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.classpath
+.project
+.settings/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Local-only helper scripts / secrets (machine specific)
+.gh_token*
+.truststore.p12
+tools/read-token.ps1
+tools/test-tokens.ps1
+tools/GitHubApi.java
+tools/HttpGet.java
+tools/SniProbe.java
+tools/probe*.ps1
+tools/find-*.ps1

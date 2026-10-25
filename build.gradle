@@ -1,0 +1,73 @@
+plugins {
+    id 'java-library'
+    id 'net.neoforged.moddev' version '2.0.141'
+}
+
+version = mod_version
+group = mod_group
+base {
+    archivesName = mod_id
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+neoForge {
+    version = project.neo_version
+
+    runs {
+        client {
+            client()
+            gameDirectory = file('run/client')
+        }
+        server {
+            server()
+            gameDirectory = file('run/server')
+            programArgument '--nogui'
+        }
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://maven.createmod.net' }   // Create 官方 maven（如果不放 libs/ 就靠它）
+}
+
+dependencies {
+    // 方式 1（推荐、离线可用）：把整合包里的 Create jar 放进 libs/
+    //   libs/create-1.21.1-6.0.11.jar
+    // compileOnly 表示“只在编译期可见”，运行时由整合包提供，不会打进本模组。
+    compileOnly fileTree(dir: 'libs', include: ['*.jar'])
+
+    // 方式 2（需要联网）：直接用 Create 官方 maven。
+    //   注意坐标随版本可能变化，先在 maven.createmod.net 上确认。
+    // compileOnly "com.simibubi.create:create-1.21.1:6.0.11"
+}
+
+processResources {
+    def props = [
+        mod_id     : mod_id,
+        mod_version: mod_version,
+        mod_name   : mod_name
+    ]
+    inputs.properties props
+    filesMatching(['META-INF/neoforge.mods.toml']) {
+        expand props
+    }
+}
+
+jar {
+    manifest {
+        attributes([
+            'Specification-Title'   : mod_name,
+            'Specification-Vendor'  : mod_group,
+            'Implementation-Title'  : mod_name,
+            'Implementation-Version': mod_version
+        ])
+    }
+}

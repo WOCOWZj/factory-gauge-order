@@ -1,0 +1,33 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "MIT"
+
+[[mods]]
+modId = "${mod_id}"
+version = "${mod_version}"
+displayName = "${mod_name}"
+description = '''
+修复机械动力（Create）工厂仪表（Factory Gauge）输入配方的顺序性缺失问题：
+仪表连接顺序、请求物品顺序、以及拆包时写入目标容器的顺序现在都保持一致。
+
+Fix for Create's order-insensitive factory gauge ingredient requests (issue #8898):
+gauge connection order is recorded, ingredient requests keep that order, and
+package contents are re-ordered against the shipped order context when unboxed.
+'''
+
+[[mixins]]
+config = "factorygaugeorder.mixins.json"
+
+[[dependencies.factorygaugeorder]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1.0,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.factorygaugeorder]]
+modId = "create"
+type = "required"
+versionRange = "[6.0.9,)"
+ordering = "NONE"
+side = "BOTH"
