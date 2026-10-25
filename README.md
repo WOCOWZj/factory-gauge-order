@@ -235,3 +235,11 @@ factory-gauge-order/
     不会静默改坏数据）；
   - 本项目**不是** Create 官方项目，也未向其仓库提交 AI 生成的 PR（Create 的 `AGENTS.md` 明确禁止）。
 - 如果你要在此基础上继续开发，建议保留本节声明，或按你的实际情况更新。
+
+---
+
+## 10. 下载（Releases）
+
+预编译 jar 见 **Releases** 页面：actorygaugeorder-1.0.0.jar（对应 1.0.0 tag）。
+放入 mods/ 即可；客户端与服务端均需安装。
+
